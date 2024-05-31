@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_fleet_branch_tree" model="ir.ui.view">
+        <field name="name">fleet.branch.tree</field>
+        <field name="model">fleet.branch</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="active" column_invisible="True"/>
+                <field name="name"/>
+                <field name="erp_code"/>
+                <field name="branch_email"/>
+                <field name="manager_email"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_branch_form" model="ir.ui.view">
+        <field name="name">fleet.branch.form</field>
+        <field name="model">fleet.branch</field>
+        <field name="arch" type="xml">
+            <form string="Branch">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_model_hub" class="oe_stat_button" icon="fa-desktop">
+                            <field name="hub_count" widget="statinfo" string="Hubs"/>
+                        </button>
+                        <button type="object" name="action_model_vehicle" class="oe_stat_button" icon="fa-car">
+                            <field name="vehicle_count" widget="statinfo" string="Vehicles"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Delhi"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="address"/>
+                            <field name="manager"/>
+                            <field name="fleet_manager"/>
+                            <field name="branch_email" widget="email"/>
+                            <!-- <field name="hub_ids" widget="many2many_tags"/>-->
+                        </group>
+                        <group>
+                            <field name="erp_code"/>
+                            <field name="manager_email" widget="email"/>
+                            <field name="fleet_manager_email" widget="email"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_fleet_branch_search" model="ir.ui.view">
+        <field name="name">fleet.branch.search</field>
+        <field name="model">fleet.branch</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="erp_code"/>
+                <!-- Filters -->
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_branch" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="res_model">fleet.branch</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Branch!
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,557 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- ### General Entry ### -->
+    <!-- Tree View -->
+    <record id="view_general_entry_tree" model="ir.ui.view">
+        <field name="name">general.entry.tree</field>
+        <field name="model">general.entry</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!--                <field name="active" column_invisible="True"/>-->
+                <field name="type"/>
+                <!--                <field name="name"/>-->
+                <field name="text"/>
+                <field name="value"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_general_entry_form" model="ir.ui.view">
+        <field name="name">general.entry.form</field>
+        <field name="model">general.entry</field>
+        <field name="arch" type="xml">
+            <form string="General Entry">
+                <sheet>
+                    <!--                    <div class="oe_button_box" name="button_box">-->
+                    <!--                        <button type="object" name="action_model_hub" class="oe_stat_button" icon="fa-desktop">-->
+                    <!--                            <field name="hub_count" widget="statinfo" string="Hubs"/>-->
+                    <!--                        </button>-->
+                    <!--                        <button type="object" name="action_model_vehicle" class="oe_stat_button" icon="fa-car">-->
+                    <!--                            <field name="vehicle_count" widget="statinfo" string="Vehicles"/>-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+                    <!--                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>-->
+                    <group>
+                        <group>
+                            <field name="type"/>
+                            <!--                            <field name="name"/>-->
+                            <field name="text"/>
+                            <field name="value"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_general_entry" model="ir.actions.act_window">
+        <field name="name">General Entries</field>
+        <field name="res_model">general.entry</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Entry!
+            </p>
+        </field>
+    </record>
+
+    <!-- ### Fleet State ### -->
+    <!-- Tree View -->
+    <record id="view_fleet_state_tree" model="ir.ui.view">
+        <field name="name">fleet.state.tree</field>
+        <field name="model">fleet.state</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!--                <field name="active" column_invisible="True"/>-->
+                <field name="name"/>
+                <field name="state_gstin"/>
+                <field name="state_short_code" string="State Short Code"/>
+                <field name="state_status"/>
+                <field name="inactivation_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_state_form" model="ir.ui.view">
+        <field name="name">fleet.state.form</field>
+        <field name="model">fleet.state</field>
+        <field name="arch" type="xml">
+            <form string="State">
+                <sheet>
+                    <!--                    <div class="oe_button_box" name="button_box">-->
+                    <!--                        <button type="object" name="action_model_hub" class="oe_stat_button" icon="fa-desktop">-->
+                    <!--                            <field name="hub_count" widget="statinfo" string="Hubs"/>-->
+                    <!--                        </button>-->
+                    <!--                        <button type="object" name="action_model_vehicle" class="oe_stat_button" icon="fa-car">-->
+                    <!--                            <field name="vehicle_count" widget="statinfo" string="Vehicles"/>-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+                    <!--                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>-->
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Delhi"/>
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <field name="state_short_code"/>
+                            <field name="billing_add"/>
+                            <field name="billing_postal"/>
+                            <field name="state_status"/>
+                        </group>
+                        <group>
+                            <field name="state_gstin"/>
+                            <field name="state_gstin_address"/>
+                            <field name="state_postal_code"/>
+                            <field name="inactivation_date" invisible="state_status != 'I'"
+                                   required="state_status == 'I'"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group col="2">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_state" model="ir.actions.act_window">
+        <field name="name">States</field>
+        <field name="res_model">fleet.state</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new State!
+            </p>
+        </field>
+    </record>
+
+    <!-- ### Fleet Branch ### -->
+    <!-- Tree View -->
+    <record id="view_fleet_branch_tree" model="ir.ui.view">
+        <field name="name">fleet.branch.tree</field>
+        <field name="model">fleet.branch</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!--                <field name="active" column_invisible="True"/>-->
+                <field name="name"/>
+                <field name="br_add"/>
+                <field name="br_postal"/>
+                <field name="br_status"/>
+                <!--                <field name="lut_no"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_branch_form" model="ir.ui.view">
+        <field name="name">fleet.branch.form</field>
+        <field name="model">fleet.branch</field>
+        <field name="arch" type="xml">
+            <form string="Branch">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Delhi"/>
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <field name="br_add"/>
+                            <field name="br_postal"/>
+                        </group>
+                        <group>
+                            <field name="lut_no"/>
+                            <field name="br_status"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group col="2">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_branch" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="res_model">fleet.branch</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Branch!
+            </p>
+        </field>
+    </record>
+
+    <!-- ### Fleet City ### -->
+    <!-- Tree View -->
+    <record id="view_fleet_city_tree" model="ir.ui.view">
+        <field name="name">fleet.city.tree</field>
+        <field name="model">fleet.city</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!--                <field name="active" column_invisible="True"/>-->
+                <field name="name"/>
+                <field name="state_id"/>
+                <field name="branch_id"/>
+                <field name="city_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_city_form" model="ir.ui.view">
+        <field name="name">fleet.city.form</field>
+        <field name="model">fleet.city</field>
+        <field name="arch" type="xml">
+            <form string="City">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Delhi"/>
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <!--                            <field name="name"/>-->
+                            <field name="state_id"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                            <field name="branch_id"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                            <field name="city_address"/>
+                            <field name="city_postal"/>
+                        </group>
+                        <group>
+                            <field name="city_contact_no"/>
+                            <field name="city_email1"/>
+                            <field name="other_emails"/>
+                            <field name="city_status"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group col="2">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_city" model="ir.actions.act_window">
+        <field name="name">Cities</field>
+        <field name="res_model">fleet.city</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new City!
+            </p>
+        </field>
+    </record>
+
+    <!-- ### Fleet Garage ### -->
+    <!-- Tree View -->
+    <record id="view_fleet_garage_tree" model="ir.ui.view">
+        <field name="name">fleet.garage.tree</field>
+        <field name="model">fleet.garage</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!--                <field name="active" column_invisible="True"/>-->
+                <field name="name"/>
+                <field name="city_id"/>
+                <field name="default_hub"/>
+                <field name="garage_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_garage_form" model="ir.ui.view">
+        <field name="name">fleet.garage.form</field>
+        <field name="model">fleet.garage</field>
+        <field name="arch" type="xml">
+            <form string="Garage">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Delhi"/>
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <!--                            <field name="name"/>-->
+                            <field name="city_id"/>
+                            <field name="garage_add"/>
+                            <field name="garage_postal"/>
+                            <field name="garage_lat"/>
+                            <field name="garage_long"/>
+                            <field name="default_hub"/>
+                        </group>
+                        <group>
+                            <field name="garage_mobile"/>
+                            <field name="garage_email"/>
+                            <field name="offline_days_btc"/>
+                            <field name="offline_days_cc"/>
+                            <field name="gps_yn"/>
+                            <field name="garage_status"/>
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group string="Billing Information">
+                            <field name="gst_state_id"/>
+                            <field name="gst_billing_add_logic"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                            <field name="billing_add"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group col="2">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_garage" model="ir.actions.act_window">
+        <field name="name">Garages</field>
+        <field name="res_model">fleet.garage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Garage!
+            </p>
+        </field>
+    </record>
+
+    <!-- ### Fleet Vehicle Group ### -->
+    <!-- Tree View -->
+    <record id="view_fleet_vehicle_group_tree" model="ir.ui.view">
+        <field name="name">fleet.vehicle.group.tree</field>
+        <field name="model">fleet.vehicle.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <field name="active" column_invisible="True"/>-->
+                <field name="name"/>
+                <field name="group_short_code"/>
+                <field name="group_rank"/>
+                <field name="group_enabled"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_vehicle_group_form" model="ir.ui.view">
+        <field name="name">fleet.vehicle.group.form</field>
+        <field name="model">fleet.vehicle.group</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Group">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="group_short_code"/>
+                            <field name="group_rank"/>
+                            <field name="group_enabled"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group col="2">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_vehicle_group" model="ir.actions.act_window">
+        <field name="name">Vehicle Groups</field>
+        <field name="res_model">fleet.vehicle.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Vehicle Group!
+            </p>
+        </field>
+    </record>
+
+    <!-- ### Fleet Chauffeur ### -->
+    <!-- Tree View -->
+    <record id="view_fleet_chauffeur_tree" model="ir.ui.view">
+        <field name="name">fleet.chauffeur.tree</field>
+        <field name="model">fleet.chauffeur</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- <field name="active" column_invisible="True"/>-->
+                <field name="id" string="Driver Code"/>
+                <field name="chf_mobile"/>
+                <field name="name"/>
+                <!--                <field name="chf_fname"/>-->
+                <!--                <field name="chf_lname"/>-->
+                <field name="pv"/>
+                <field name="license_no"/>
+                <field name="general_entry_id"/>
+                <field name="vendor_id"/>
+                <field name="br_id"/>
+                <field name="city_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_chauffeur_form" model="ir.ui.view">
+        <field name="name">fleet.chauffeur.form</field>
+        <field name="model">fleet.chauffeur</field>
+        <field name="arch" type="xml">
+            <form string="Chauffeur">
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="managed" invisible="1"/>
+                            <field name="general_entry_id"
+                                   options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                            <field name="vendor_id" required="managed == '2'" readonly="managed != '2'"/>
+                            <field name="chf_mobile"/>
+                            <field name="chf_fname"/>
+                            <field name="chf_lname"/>
+                            <field name="chf_email"/>
+                            <field name="chf_doj"/>
+                            <field name="chf_status"/>
+                        </group>
+                        <group>
+                            <field name="br_id"/>
+                            <field name="city_id"/>
+                            <field name="garage_id"/>
+                            <field name="pv"/>
+                            <field name="fadv"/>
+                            <field name="license_no"/>
+                            <field name="licence_expiry_date"/>
+                            <field name="chf_dob"/>
+                        </group>
+                    </group>
+                    <hr/>
+                    <group col="2">
+                        <group>
+                            <field name="create_uid" readonly="1"/>
+                            <field name="write_uid" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="write_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_chauffeur" model="ir.actions.act_window">
+        <field name="name">Chauffeurs</field>
+        <field name="res_model">fleet.chauffeur</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Chauffeur!
+            </p>
+        </field>
+    </record>
+</odoo>

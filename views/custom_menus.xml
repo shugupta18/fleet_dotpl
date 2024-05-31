@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!--        <menuitem id="menu_masters_main" name="Masters" sequence="-1"-->
+        <!--                  parent="fleet.menu_root">-->
+        <!--            <menuitem id="menu_masters_main" name="Masters" sequence="-1" parent="fleet.menu_root">-->
+        <!--                <menuitem id="menu_general_entries" name="General Entries" sequence="10" action="action_general_entry"/>-->
+        <!--                <menuitem id="menu_states" name="States" sequence="20" action="action_fleet_state"/>-->
+        <!--                <menuitem id="menu_branches" name="Branches" sequence="30" action="action_fleet_branch"/>-->
+        <!--                <menuitem id="menu_cities" name="Cities" sequence="40" action="action_fleet_city"/>-->
+        <!--                <menuitem id="menu_garages" name="Garages" sequence="60" action="action_fleet_garage"/>-->
+        <!--                <menuitem id="menu_vehicle_groups" name="Vehicle Groups" sequence="80"-->
+        <!--                          action="action_fleet_vehicle_group"/>-->
+        <!--                <menuitem id="menu_vendors" name="Vendors" sequence="100" action="account.res_partner_action_supplier"/>-->
+        <!--                &lt;!&ndash;            <menuitem id="menu_chauffeurs" name="Chauffeurs" sequence="120" action="action_fleet_chauffeur"/>&ndash;&gt;-->
+        <!--            </menuitem>-->
+        <!--        </menuitem>-->
+
+        <!--        <menuitem id="menu_document_main" name="Fleet Documents" sequence="-1"-->
+        <!--                  parent="fleet.fleet_vehicles" action="action_fleet_document"/>-->
+
+        <!--        <menuitem id="menu_custom_configuration_main" name="Custom Configuration" sequence="110"-->
+        <!--                  parent="fleet.menu_root">-->
+        <!--            <menuitem id="documents_config_main" name="Documents" sequence="10">-->
+        <!--                <menuitem id="menu_document_type_category" name="DocType Categories" sequence="10"-->
+        <!--                          action="action_fleet_document_type_category"/>-->
+        <!--                <menuitem id="menu_document_type" name="Document Types" sequence="20"-->
+        <!--                          action="action_fleet_document_type"/>-->
+        <!--                <menuitem id="menu_document_tags" name="Document Tags" sequence="30"-->
+        <!--                          action="action_fleet_document_tag"/>-->
+        <!--            </menuitem>-->
+        <!--            <menuitem id="hierarchy_config_main" name="Hierarchy" sequence="20">-->
+        <!--&lt;!&ndash;                <menuitem id="menu_branch" name="Branches" sequence="10" action="action_fleet_branch"/>&ndash;&gt;-->
+        <!--                <menuitem id="menu_hub" name="Hubs" sequence="20" action="action_fleet_hub"/>-->
+        <!--            </menuitem>-->
+        <!--        </menuitem>-->
+        <!--        -->
+        <record id="fleet.menu_root" model="ir.ui.menu">
+            <field name="sequence">1</field>
+            <field name="action" ref="fleet.fleet_vehicle_action"/>
+        </record>
+
+        <menuitem id="menu_masters_main" name="Masters" sequence="-1" parent="fleet.menu_root">
+            <menuitem id="vehicle_management_master_main" name="Vehicle Management" sequence="20">
+                <menuitem id="menu_vehicle_groups" name="Vehicle Groups" sequence="20"
+                          action="action_fleet_vehicle_group"/>
+                <menuitem id="menu_vendors" name="Vendors" sequence="10" action="account.res_partner_action_supplier"/>
+                <menuitem id="menu_chauffeurs" name="Chauffeurs" sequence="40" action="action_fleet_chauffeur"/>
+            </menuitem>
+            <menuitem id="hierarchy_master_main" name="Hierarchy" sequence="10">
+                <menuitem id="menu_states" name="States" sequence="10" action="action_fleet_state"/>
+                <menuitem id="menu_branches" name="Branches" sequence="20" action="action_fleet_branch"/>
+                <menuitem id="menu_cities" name="Cities" sequence="30" action="action_fleet_city"/>
+                <menuitem id="menu_garages" name="Garages" sequence="40" action="action_fleet_garage"/>
+            </menuitem>
+            <menuitem id="menu_general_entries" name="General Entries" sequence="30" action="action_general_entry"/>
+        </menuitem>
+
+        <record id="fleet.fleet_vehicles" model="ir.ui.menu">
+            <field name="name">Fleet Services</field>
+        </record>
+
+        <record id="fleet.fleet_vehicle_menu" model="ir.ui.menu">
+            <field name="parent_id" ref="vehicle_management_master_main"/>
+            <field name="name">Vehicles</field>
+            <field name="sequence">30</field>
+        </record>
+
+    </data>
+</odoo>

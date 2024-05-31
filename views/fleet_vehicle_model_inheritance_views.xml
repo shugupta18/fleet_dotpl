@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<odoo>
+
+<!--    &lt;!&ndash; Manufacturer Tree Inheritance &ndash;&gt;-->
+<!--    <record id='fleet_vehicle_model_brand_view_tree_inheritance' model='ir.ui.view'>-->
+<!--        <field name="name">fleet.vehicle.model.brand.tree.inheritance</field>-->
+<!--        <field name="model">fleet.vehicle.model.brand</field>-->
+<!--        <field name="inherit_id" ref="fleet.fleet_vehicle_model_brand_view_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <data>-->
+<!--                <xpath expr="//field[@name='name']" position="after">-->
+<!--                    <field name="erp_code"/>-->
+<!--                </xpath>-->
+<!--            </data>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Manufacturer Form Inheritance &ndash;&gt;-->
+<!--    <record id="fleet_vehicle_model_brand_view_form_inheritance" model="ir.ui.view">-->
+<!--        <field name="name">fleet.vehicle.model.brand.form.inheritance</field>-->
+<!--        <field name="model">fleet.vehicle.model.brand</field>-->
+<!--        <field name="inherit_id" ref="fleet.fleet_vehicle_model_brand_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <data>-->
+<!--                <xpath expr="//group" position="after">-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="erp_code"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </xpath>-->
+<!--            </data>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Model Tree Inheritance -->
+<!--    <record id='fleet_vehicle_model_view_tree_inheritance' model='ir.ui.view'>-->
+<!--        <field name="name">fleet.vehicle.model.tree.inheritance</field>-->
+<!--        <field name="model">fleet.vehicle.model</field>-->
+<!--        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <data>-->
+<!--                <xpath expr="//field[@name='name']" position="after">-->
+<!--                    <field name="erp_code"/>-->
+<!--                </xpath>-->
+<!--            </data>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Model Form Inheritance -->
+    <record id="fleet_vehicle_model_view_form_inheritance" model="ir.ui.view">
+        <field name="name">fleet.vehicle.model.form.inheritance</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Below Fields are updated-->
+            <field name="category_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}</attribute>
+            </field>
+            <field name="vehicle_type" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="default_fuel_type" position="attributes">
+                <attribute name="required">0</attribute>
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <!-- Below Fields are added -->
+            <data>
+                <xpath expr="//field[@name='category_id']" position="before">
+                    <field name="variant_name"/>
+                    <field name="vehicle_group_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="model_status"/>
+                </xpath>
+                <xpath expr="//field[@name='default_fuel_type']" position="after">
+                    <field name="fuel_type_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <field name="kmpl"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>

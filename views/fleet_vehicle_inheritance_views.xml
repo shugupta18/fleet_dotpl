@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Vehicle Form Inheritance -->
+    <record id="fleet_vehicle_view_form_inheritance" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inheritance</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//group/field[@name='future_driver_id']" position="before">
+                    <field name="ownership"/>
+                </xpath>
+<!--                <xpath expr="//group/group/field[@name='location']" position="before">-->
+<!--                    <field name="branch_id"/>-->
+<!--                    <field name="hub_id" options="{'no_create_edit': [('branch_id', '=', False)]}"/>-->
+<!--                </xpath>-->
+                <xpath expr="//notebook/page[3]" position="before">
+                    <page string="Documents" name="documents">
+                        <field name="document_ids"/>
+                    </page>
+                    <page string="History Documents" name="history_documents">
+                        <field name="history_document_ids"/>
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <!-- Vehicle Search Inheritance -->
+    <record id="fleet_vehicle_view_search_inheritance" model="ir.ui.view">
+        <field name="name">fleet.vehicle.search.inheritance</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//search/field[@name='name']" position="after">
+<!--                    <field string="Branch" name="branch_id"/>-->
+<!--                    <field string="Hub" name="hub_id"/>-->
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Users Form Inheritance -->
+    <record id="view_users_form_inherit" model="ir.ui.view">
+    <field name="name">res.users.form.inherit</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form"/>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//div[@class='oe_title']/group" position="before">
+                <group>
+<!--                    <field name="branch_ids" widget="many2many_tags" options="{'no_create_edit': True}"-->
+<!--                           string="Branches"/>-->
+<!--                    <field name="hub_ids" widget="many2many_tags" options="{'no_create_edit': True}"-->
+<!--                           string="Hubs"/>-->
+                </group>
+            </xpath>
+        </data>
+    </field>
+</record>
+
+</odoo>

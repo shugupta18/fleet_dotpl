@@ -1,0 +1,9 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+general_entry_access_right_user,general_entry_access_right,model_general_entry,base.group_user,1,1,1,1
+fleet_state_access_right_user,fleet_state_access_right,model_fleet_state,base.group_user,1,1,1,1
+fleet_branch_access_right_user,fleet_branch_access_right,model_fleet_branch,base.group_user,1,1,1,1
+fleet_city_access_right_user,fleet_city_access_right,model_fleet_city,base.group_user,1,1,1,1
+fleet_garage_access_right_user,fleet_garage_access_right,model_fleet_garage,base.group_user,1,1,1,1
+fleet_vehicle_group_access_right_user,fleet_vehicle_group_access_right,model_fleet_vehicle_group,base.group_user,1,1,1,1
+fleet_chauffeur_access_right_user,fleet_chauffeur_access_right,model_fleet_chauffeur,base.group_user,1,1,1,1
+

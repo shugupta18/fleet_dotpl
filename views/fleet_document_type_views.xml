@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_fleet_document_type_tree" model="ir.ui.view">
+        <field name="name">fleet.document.type.tree</field>
+        <field name="model">fleet.document.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="recurring_flag"/>
+                <field name="expire_in_days"/>
+                <field name="reminder_required_in_days"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleet_document_type_form" model="ir.ui.view">
+        <field name="name">fleet.document.type.form</field>
+        <field name="model">fleet.document.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. RC"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="category_id"/>
+                            <field name="recurring_flag"/>
+                        </group>
+                        <group>
+                            <field name="expire_in_days" invisible="recurring_flag == False"/>
+                            <field name="reminder_required_in_days" invisible="recurring_flag == False"/>
+                        </group>
+                    </group>
+                </sheet>
+                <!-- Add Chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_fleet_document_type_search" model="ir.ui.view">
+        <field name="name">fleet.document.type.search</field>
+        <field name="model">fleet.document.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <!-- Filters -->
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="1" string="Group By">
+                    <filter name="groupby_category" context="{'group_by' : 'category_id'}" string="Document Category"/>
+                    <filter name="groupby_recurring_flag" context="{'group_by' : 'recurring_flag'}" string="Is Recurring"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleet_document_type" model="ir.actions.act_window">
+        <field name="name">Document Types</field>
+        <field name="res_model">fleet.document.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_groupby_category" : True,}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Document Type!
+            </p><p>
+            You can define document type (e.g. RC, Permit).
+          </p>
+        </field>
+    </record>
+
+</odoo>
